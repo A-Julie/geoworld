@@ -67,3 +67,32 @@ function getCountriesByContinent($continent)
     // on retourne un tableau d'objets (car spécifié dans connect-db.php)
     return $prep->fetchAll();
 }
+function getNomContinent()
+{
+    global $pdo;
+    $query = 'SELECT DISTINCT (Continent) FROM Country ';
+    return $pdo->query($query)->fetchAll();
+}
+function getNomCapital($name)
+{
+    global $pdo;
+    $query = 'SELECT Name FROM city WHERE id= :Capital;';
+    $prep = $pdo->prepare($query);
+    $prep->bindValue(':Capital',$name, PDO::PARAM_STR);
+    $prep->execute();
+    return $prep->fetchAll();
+}
+function getCountry($id){
+    global $pdo;
+    $requete = "SELECT * FROM city where idCountry = :id";
+    try{
+    $prep = $pdo->prepare($requete);
+    $prep->bindParam(':id', $id, PDO::PARAM_INT);
+    $prep->execute();
+    $result = $prep->fetch();
+    return $result;
+    }
+    catch ( Exception $e ) {
+    die ("erreur dans la requete ".$e->getMessage());
+    }
+}

@@ -22,7 +22,7 @@
 
   <!-- Bootstrap core CSS -->
   <link href="assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
-
+  
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -41,7 +41,8 @@
 
 
 <body>
-
+<?php require_once 'inc/manager-db.php';?>
+<?php $desContinent = getNomContinent(); ?>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Geoworld</a>
@@ -54,18 +55,20 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="">Compte</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
+       
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false">Dropdown</a>
+             aria-expanded="false">continent</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+
+            <?php foreach($desContinent as $cont):?>
+              <a class="dropdown-item" href="?continent=<?php echo"$cont->Continent";?>"><?php echo$cont->Continent?></a>
+            <?php endforeach ?>
           </div>
         </li>
         <li class="nav-item">
